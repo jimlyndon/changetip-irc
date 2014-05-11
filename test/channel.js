@@ -2,8 +2,8 @@ var assert = require("assert")
   , sinon = require('sinon')
   , irc = require('slate-irc')
   , Stream = require('stream').PassThrough
-  , Network = require('../lib/network')
-  , Channel = require('../lib/channel');
+  , Network = require('../lib/bot/network')
+  , Channel = require('../lib/bot/channel');
 
 describe('channel', function() {
   var stream, client, network, channel;
