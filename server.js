@@ -1,7 +1,7 @@
-var Network = require('./lib/network')
+var express = require('express')
+  , Network = require('./lib/bot/network')
   , log = require('./lib/logging/log')
-  , express = require('express')
-  , networks = require('./api/networks');
+  , networks = require('./lib/api/networks');
 
 log.info('boot');
 
@@ -25,7 +25,7 @@ var options = [
 //     realname: process.env.USER,
 //     password: process.env.CRED
 //   }
-// ];
+];
 
 var state = {
   networks: []
