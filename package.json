@@ -1,0 +1,17 @@
+{
+  "name": "changetip-irc",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "slate-irc": "^0.5.0",
+    "events": "^1.0.0",
+    "express": "^4.1.2",
+    "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.6.2",
+    "sinon": "*",
+    "mocha": "*",
+    "should": "*"
+  }
+}
