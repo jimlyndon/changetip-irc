@@ -1,16 +1,14 @@
-//var messageInput = require('message-input');
 var Network = require('./lib/network');
 var log = require('./lib/logging/log');
 var express = require('express');
-//var status = require('./api/index');
 var networks = require('./api/networks');
 
 log.info('boot');
 
-//port: 6667,
+
 var options = [
 	{
-		port: 6697,
+		port: 6697, // ssl - not every irc network supports ssl
 		host: 'irc.freenode.org',
 		nickname: 'ChangeTip',
 		username: process.env.USER,
@@ -18,8 +16,10 @@ var options = [
 		password: process.env.CRED,
 		secure: true
 	}
+
+// need to figure out why QuakeNet isn't allowing auto channel joins onconnect
 //	{
-//		port: 6667,
+//		port: 6667, // http
 //		host: 'blacklotus.ca.us.quakenet.org',
 //		nickname: 'ChangeTip',
 //		username: process.env.USER,
@@ -41,12 +41,13 @@ options.forEach(function(opts) {
 	state.networks.push(nw);
 
 	nw.join('#changetip');
-	nw .join('#changecoin');
+	nw.join('#changecoin');
 });
 
 
 
 
+// Rest API for external querying
 var api = express();
 
 // Make our irc bot data available to our API
