@@ -1,5 +1,5 @@
-var express = require('express'),
-	_ = require('lodash');
+var express = require('express')
+  , _ = require('lodash');
 
 var router = express.Router();
 
@@ -7,17 +7,17 @@ var router = express.Router();
  * GET user
  */
 router.get('/channels/:id', function(req, res) {
-	var hosts = _.map(req.networks, function(network) {
-		return {
-			host: network.host,
-			port: network.port,
-			realname: network.realname,
-			username: network.username,
-			currentnick: network.nickname
-		}
-	});
+  var hosts = _.map(req.networks, function(network) {
+    return {
+      host: network.host,
+      port: network.port,
+      realname: network.realname,
+      username: network.username,
+      currentnick: network.nickname
+    };
+  });
 
-	res.json(hosts);
+  res.json(hosts);
 });
 
 module.exports = router;
