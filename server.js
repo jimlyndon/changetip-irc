@@ -1,7 +1,9 @@
 var express = require('express')
+  , Resource = require('express-resource')
   , Network = require('./lib/bot/network')
-  , log = require('./lib/logging/log')
-  , networks = require('./lib/api/networks');
+  , log = require('./lib/logging/log');
+  // , networks = require('./lib/api/networks')
+  // , channels = require('./lib/api/channels');
 
 log.info('boot');
 
@@ -52,9 +54,11 @@ api.use(function(req,res,next){
   next();
 });
 
-// api.use('/', status);
-api.use('/networks', networks);
-api.use('/networks/:id', networks);
+var network = api.resource('networks', require('./lib/api/networks'));
+var channel = api.resource('channels', require('./lib/api/channels'));
+network.map(channel);
+
+// networks.add(channels);
 
 // catch 404 and forwarding to error handler
 api.use(function(req, res, next) {

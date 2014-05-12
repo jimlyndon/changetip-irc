@@ -5,8 +5,12 @@
   "dependencies": {
     "slate-irc": "^0.5.0",
     "events": "^1.0.0",
-    "express": "^4.1.2",
-    "lodash": "^2.4.1"
+    "express": "3.x",
+    "lodash": "^2.4.1",
+    "express-resource": "^1.0.0",
+    "biguint-format": "^0.2.0",
+    "flake-idgen": "^0.1.1",
+    "supertest": "0.1.2"
   },
   "devDependencies": {
     "gulp": "^3.6.2",
