@@ -23,7 +23,7 @@ Bring the ChangeTip tipping functionality to IRC!
 * Start server, passing credentials to it
 
     ```sh
-    $ USER=ChangeTip CRED=??? node server.js
+    $ CT\_USER=ChangeTip CT\_CRED=??? node server.js
     ```
 
 ## RESTful API

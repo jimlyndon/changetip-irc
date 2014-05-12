@@ -3,7 +3,7 @@
 //     port: 6667, // http
 //     host: 'blacklotus.ca.us.quakenet.org',
 //     nickname: 'ChangeTip',
-//     username: process.env.USER,
-//     realname: process.env.USER,
-//     password: process.env.CRED
+//     username: process.env.CT_USER,
+//     realname: process.env.CT_USER,
+//     password: process.env.CT_CRED,
 //   };
