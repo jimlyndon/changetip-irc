@@ -2,38 +2,25 @@ var express = require('express')
   , Resource = require('express-resource')
   , Network = require('./lib/bot/network')
   , log = require('./lib/logging/log');
-  // , networks = require('./lib/api/networks')
-  // , channels = require('./lib/api/channels');
 
-log.info('boot');
+var msg = 'Booting up irc bot and api endpoints';
+log.info(msg);
+console.log(msg);
 
-var options = [
-  {
-    port: 6697, // ssl - not every irc network supports ssl
-    host: 'irc.freenode.org',
-    nickname: 'ChangeTip',
-    username: process.env.USER,
-    realname: process.env.USER,
-    password: process.env.CRED,
-    secure: true
-  }
+// Load all configs
+var boptions = [];
+require("fs").readdirSync("./bootstrap").forEach(function(file) {
+  var config = require("./bootstrap/" + file);
+  if(Object.keys(config).length !== 0) boptions.push(config);
+});
 
-// need to figure out why QuakeNet isn't allowing auto channel joins onconnect
-//   {
-//     port: 6667, // http
-//     host: 'blacklotus.ca.us.quakenet.org',
-//     nickname: 'ChangeTip',
-//     username: process.env.USER,
-//     realname: process.env.USER,
-//     password: process.env.CRED
-//   }
-];
-
+// API state
 var state = {
   networks: []
 };
 
-options.forEach(function(opts) {
+// Join irc networks
+boptions.forEach(function(opts) {
   log.info('connect to %s:%s', opts.host, opts.port);
   opts.log = log;
 
@@ -41,8 +28,9 @@ options.forEach(function(opts) {
   nw.connect();
   state.networks.push(nw);
 
-  nw.join('#changetip');
-  nw.join('#changecoin');
+  opts.channels.forEach(function(channel) {
+    nw.join(channel);
+  });
 });
 
 // Rest API for external querying
@@ -58,15 +46,17 @@ var network = api.resource('networks', require('./lib/api/networks'));
 var channel = api.resource('channels', require('./lib/api/channels'));
 network.map(channel);
 
-// networks.add(channels);
-
-// catch 404 and forwarding to error handler
+// Catch 404 and forwarding to error handler
 api.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-api.listen(3333);
+// Start api listener
+var apiport = 3333;
+api.listen(apiport);
 
-console.log('Listening on port 3333...');
+msg = 'API listening on port ' + apiport + '...';
+log.info(msg);
+console.log(msg);
