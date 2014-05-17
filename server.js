@@ -70,7 +70,7 @@ api.use(function(req, res, next) {
 });
 
 // Start api listener
-var apiport = 3333;
+var apiport = Number(process.env.PORT || 5000);
 api.listen(apiport);
 
 msg = 'API listening on port ' + apiport + '...';
