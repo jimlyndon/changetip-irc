@@ -1,6 +1,7 @@
 # ChangeTip IRC Bot
 
 Bring the ChangeTip tipping functionality to IRC!
+Proof of concept, and the API calls are stubbed.  Accepting pull requests, in particular for securely indentifying a tipper in an irc channel (which is the real meat of any tip bot).  =)
 
 
 ## Install and Run
